@@ -1,6 +1,5 @@
 package com.Hartwig.FitSync.controller;
 
-
 import com.Hartwig.FitSync.model.User;
 import com.Hartwig.FitSync.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ public class UserController {
 
     @Autowired
     UserService userService;
-
 
     @PostMapping("/register")
     public ResponseEntity<User> registerUser() {
