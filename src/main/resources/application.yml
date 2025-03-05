@@ -14,9 +14,8 @@ spring:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false
-    show-sql: true
+    show-sql: false
     database-platform: org.hibernate.dialect.MySQL8Dialect
   liquibase:
     change-log: classpath:db/liquibase/master.xml
-#  kafka:
-#    bootstrap-servers: localhost:9092
+

@@ -21,23 +21,24 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_User;
+    @Column(name = "ID_USER")
+    private Long idUser;
 
     @NonNull
+    @Column(name = "LOGIN")
     private String login;
 
     @NotNull
+    @Column(name = "PASSWORD")
     private String password;
 
     @NotNull
+    @Column(name = "ROLE")
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @Column(name = "NAME")
     private String name;
-
-    public User(String name, String login) {
-        this.name = name;
-        this.login = login;
-    }
 
     public User(String login, String encryptedPassword, UserRole role) {
         this.login = login;
