@@ -1,6 +1,8 @@
 package com.Hartwig.FitSync.controller;
 
+import com.Hartwig.FitSync.config.security.TokenService;
 import com.Hartwig.FitSync.dto.AuthenticationDTO;
+import com.Hartwig.FitSync.dto.LoginResponseDTO;
 import com.Hartwig.FitSync.dto.RegisterDTO;
 import com.Hartwig.FitSync.model.User;
 import com.Hartwig.FitSync.repository.UserRepository;
@@ -24,12 +26,17 @@ public class AuthenticationController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    TokenService tokenService;
+
     @PostMapping("/login")
     public ResponseEntity login(@Valid @RequestBody AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
